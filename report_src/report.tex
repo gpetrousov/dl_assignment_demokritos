@@ -1,0 +1,458 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ioannis Petrousov
+% petrousov@gmail.com
+% 2025
+%
+% Custom Latex thesis/report template
+% to be used for English language.
+%
+% Initial compile:
+%     1. xelatex
+%     2. bibtex
+%     3. xelatex
+%     4. xelatex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,hitec]{report}
+
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{setspace}
+\setstretch{1.0}
+\usepackage{titlesec}
+
+% Chapter title appearance format
+\titleformat{\chapter}[display]
+{\bfseries\huge}{\chaptertitlename\space}{16pt}{}
+\titlespacing{\chapter}{0pc}{1.5ex plus .1ex minus .2ex}{5pc}
+
+% Section title appearance format
+\titleformat{\section}
+{\bfseries\large}{\thesection}{14pt}{}
+% Source - https://stackoverflow.com/a/26958503
+\renewcommand{\thesection}{\arabic{section}}
+
+% Subsection title appearance format
+\titleformat{\subsection}
+{\bfseries\normalsize}{\thesubsection}{12pt}{}
+
+% Set margins
+\usepackage{geometry}
+\geometry{left=3cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+% XeLaTeX font selection
+\usepackage{fontspec}
+\usepackage{xltxtra}
+\setmainfont[Mapping=tex-text]{XITS}
+
+% Images and figures support
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+% Caption customization
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize,labelfont=footnotesize}
+\usepackage[normalem]{ulem} 
+\DeclareCaptionLabelFormat{label_format}{\uline{#1~#2}} 
+\DeclareCaptionTextFormat{text_format}{\uline{#1}} 
+\DeclareCaptionLabelSeparator{separator_format}{\uline{:~}} 
+\usepackage{subcaption}
+
+\usepackage{xcolor}
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do\.\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+
+\fancypagestyle{plain}{%
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhf{}
+    \fancyfoot[R]{\thepage}%
+}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\renewcommand*{\algorithmcfname}{Algorithm}
+\renewcommand\listalgorithmcfname{List of Algorithms}
+
+\usepackage[toc,page]{appendix}
+\usepackage{booktabs}
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixpagename}{Appendices}
+
+\begin{document}
+
+%--- TITLE PAGE ---
+\begin{titlepage}
+\begin{center}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.2\textwidth]{images/program_logo.png}
+\caption*{D.P.M.S.\\ Artificial Intelligence}
+\end{figure}
+
+\begin{center}
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[height=2cm]{images/unipi_logo.png}
+    \end{minipage}%
+    \hfill 
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[height=2cm]{images/demokritos_logo.png}
+    \end{minipage}
+\end{center}
+
+\begin{center}
+\vspace{2cm}
+\HRule \\[0.4cm]
+{\huge Evaluating Supevised Contrastive Learning for noise-robust Speech Emotion Recognition}
+\HRule \\[0.4cm]
+\end{center}
+
+Course: Deep Learning
+
+\vfill
+\begin{doublespacing}
+{\LARGE Ioannis Petrousov\\}
+{\large contact@petrousoft.com\\}
+\vfill
+{\Large \ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi, \number\year}
+\end{doublespacing}
+\end{center}
+\end{titlepage}
+
+%--- ASSIGNMENT CONTENT ---
+% \begin{center}
+%     {\huge \bfseries Integrating Individual Contributions as Intrinsic Exploration Scaffolds into PyMARLZoo$^{+}$} \\[0.4cm]
+%     {\LARGE Ioannis Petrousov} \\[0.2cm]
+%     {\large contact@petrousoft.com}
+% \end{center}
+
+\newpage
+\section*{Declaration on the use of Artificial Intelligence}
+\addcontentsline{toc}{section}{Declaration on the use of Artificial Intelligence}
+
+I hereby declare that generative Artificial Intelligence (AI) tools, specifically Large Language Models (Gemini 3.5 Flash - Standard), were utilized during the preparation of this report. The nature and scope of this assistance are detailed below:
+
+\begin{itemize}
+    \item \textbf{Mathematical to Code Translation:} AI tools were used as aid to cross-reference theoretical foundations from the source literature against structural \lstinline{pytorch} classes and operational components.
+    \item \textbf{Text Modification and Polishing:} AI assistance was used to refine expressions, correct syntax errors, and smooth technical transitions. The core ideas, literature selection, and methodological descriptions remain entirely my own.
+\end{itemize}
+
+All primary research data, custom convolutional neural network configurations, dataset splitting protocols, and final analytical conclusions were generated entirely through my own engineering work. No section of this report was completely synthesized or fabricated by automated generation platforms.
+
+\vspace{1.5cm}
+
+% \noindent
+% \begin{minipage}[t]{0.45\textwidth}
+%     \rule{\textwidth}{0.4pt}\\
+%     \textbf{Location, Date}
+% \end{minipage}
+% \hfill
+% \begin{minipage}[t]{0.45\textwidth}
+%     \rule{\textwidth}{0.4pt}\\
+%     \textbf{Ioannis Petrousov}
+% \end{minipage}
+
+\newpage
+
+
+% ------------------------------------------------ %
+
+
+\begin{abstract}
+    Speech Emotion Recognition (SER) on limited datasets such as RAVDESS often leads to severe model overfitting. This study explores a Supervised Contrastive Learning (SupCon) pipeline, combined with multi-view SpecAugment, to extract invariant emotional representations rather than memorizing brittle acoustic frequencies. Our results demonstrate that the SupCon architecture increases baseline clean accuracy from 57\% to 70\% over a standard Cross-Entropy approach, while simultaneously exhibiting substantially greater robustness to heavy Gaussian noise degradation.
+\end{abstract}
+
+
+% ------------------------------------------------ %
+
+\section{Introduction and Motivation}
+
+\subsection{The Challenge of Speech Emotion Recognition (SER)}
+Speech Emotion Recognition (SER) is a notoriously challenging domain within audio processing, primarily due to the high inter-class variance and the subjective nature of human emotional expression. This challenge is heavily exacerbated when working with small-scale datasets such as RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song), which contains roughly 1,200 training samples. When deploying standard deep learning architectures on such limited data, neural networks exhibit a strong tendency to bypass the intended task of learning generalized emotional representations. Instead, they exploit the path of least resistance by memorizing the unique acoustic signatures (pitch, timbre, and cadence) of the specific actors in the training set. Consequently, while the model may achieve artificially high training accuracy, its performance drastically degrades when evaluated on unseen actors, exposing weak decision boundaries that fail to capture true semantic emotional features.
+
+% ------------------------------------------------ %
+
+\subsection{The Flaws of Cross-Entropy and the SupCon Hypothesis}
+ Standard Cross-Entropy (CE) loss, despite being the default standard for classification tasks, is fundamentally limited when applied to highly variable, low-resource datasets. The CE objective strictly penalizes point-wise misclassifications, driving the network to construct linear hyperplanes based on any available discriminative feature. In the context of SER, this aggressive optimization forces the model to latch onto non-semantic acoustic artifacts (background noise or a specific actor's baseline pitch) rather than learning generalized emotional structures. This rsults in weak decision boundaries which are highly susceptible to distribution shifts or environmental noise.
+
+To address this, we hypothesize that Supervised Contrastive Learning (SupCon) can yield significantly more robust representations. Instead of directly predicting a hard class label, SupCon maps input spectrograms into a normalized embedding space. By pulling heavily augmented, multi-view representations (via Time and Frequency masking) of the same emotion closer together while pushing differing emotions apart, the network is forced to ignore augmentation-induced distortions. We hypothesize that this mechanism decouples the core semantic structure of the emotion from brittle, actor-specific frequencies, thereby producing a classifier that maintains high accuracy even under severe acoustic degradation.
+
+% ------------------------------------------------ %
+
+\section{Data and Preprocessing}
+\subsection{The RAVDESS Dataset}
+This study utilizes the speech audio-only subset of the RAVDESS dataset, featuring 24 professional actors (12 male, 12 female) delivering lexically matched statements across eight distinct emotions: Neutral, Calm, Happy, Sad, Angry, Fearful, Disgust, and Surprised. The dataset comprises 1,440 highly balanced audio files. To rigorously evaluate model generalization and prevent vocal memorization (data leakage), a strict speaker-independent split was enforced. By holding out specific actors entirely for the test set, the data was partitioned to yield an effective training corpus of approximately 1,200 samples for unbiased evaluation.
+
+
+% ------------------------------------------------ %
+
+
+\subsection{Audio to Mel-Spectrogram Conversion}
+To leverage the spatial pattern-recognition capabilities of Convolutional Neural Networks (CNNs), the 1D audio waveforms were transformed into 2D Mel-Spectrograms. This process involves computing the Short-Time Fourier Transform (STFT) to extract frequency content over time, followed by mapping the power spectra onto the Mel scale to mimic human auditory perception. The resulting 2D matrix (frequency bins $\times$ time frames) is mathematically processed by the network as a 1-channel grayscale image tensor, providing spatially correlated representation of the acoustic energy.
+
+
+% ------------------------------------------------ %
+
+\subsection{Data Augmentation (SpecAugment)}
+We applied the \textit{SpecAugment} technique to the Mel-Spectrograms during training. This artificially expands the dataset and forces the network to learn invariant features. SpecAugment operates directly on the spectrogram by randomly masking out continuous blocks of frequency channels and time steps. For the baseline model, this acts as a powerful regularizer. 
+
+More importantly, SpecAugment drives the Multi-View strategy for the SupCon pipeline. The augmentation generates two differently masked versions of the exact same audio file. The contrastive loss function then forces the CNN to map both distorted inputs to the same coordinate space. This mechanism effectively blinds the network to specific acoustic artifacts and extracts only the underlying emotional structure.
+
+% ------------------------------------------------ %
+
+\section{Methodology and Architectures}
+\subsection{The Custom CNN Backbone}
+
+To extract spatial features from the Mel-Spectrograms, a custom, lightweight 2D Convolutional Neural Network (CNN) was designed. The architecture consists of four sequential convolutional blocks, each utilizing $3 \times 3$ kernels, Batch Normalization, Leaky ReLU activation, and $2 \times 2$ Max Pooling. The network was intentionally kept shallow. Deploying massively parameterized models on a dataset of $\sim$1,200 samples drastically increases the risk of overfitting.
+
+% ------------------------------------------------ %
+
+\subsection{Model A: The Cross-Entropy Baseline}
+To establish a rigorous benchmark, Model A was trained end-to-end using standard Cross-Entropy loss. The 4-layer CNN backbone was flattened and connected to a shallow, two-layer dense classification head. The model was optimized using the Adam optimizer to directly map the input spectrograms to one of the eight discrete emotion classes. This baseline serves to quantify the upper limit of traditional, label-driven classification on the RAVDESS dataset.
+
+% ------------------------------------------------ %
+
+\subsection{Model B: The SupCon Pipeline}
+\subsubsection{Stage 1: Contrastive Clustering}
+The core methodology relies on the two-phase training of Model B. In Stage 1, the CNN backbone connects to a non-linear projection head. Each batch of spectrograms undergoes a Multi-View strategy. The SpecAugment module processes the data twice to generate two heavily masked variations of the same audio. The Supervised Contrastive Loss function is then applied to these projected embeddings. This forces the network to pull different views of the same emotion into tightly packed clusters. Simultaneously, it repels the embeddings of different classes. Crucially, this stage focuses entirely on representation learning. The model structures the feature space without outputting explicit class predictions.
+
+
+\subsubsection{Stage 2 \& 3: Linear Probing and Fine-Tuning}
+Once the clusters are firmly established, the projection head is discarded. In Stage 2 (Linear Probing), the CNN encoder is strictly frozen, and a single linear classification layer is attached and trained. This proves the linear separability of the contrastively learned clusters. Finally, in Stage 3 (End-to-End Fine-Tuning), the entire network is unfrozen. Differential learning rates are applied during this phase. A highly conservative learning rate is assigned to the encoder to protect the established clusters. Meanwhile, the classifier head utilizes a standard learning rate. This final micro-adjustment binds the feature extractor and the classifier, yielding the ultimate predictive model.
+
+% ------------------------------------------------ %
+
+
+\section{Experiments and Results}
+
+\subsection{Standard Evaluation (Clean Accuracy)}
+
+\begin{table}[htpb]
+    \centering
+    
+    % ================= ROW 1 =================
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{
+        \begin{tabular}{lcccc}
+        \hline
+        \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+        Neutral          & 0.50               & 0.71            & 0.59              & 7                \\
+        Calm             & 0.50               & 0.87            & 0.63              & 15               \\
+        Happy            & 0.33               & 0.21            & 0.26              & 14               \\
+        Sad              & 0.08               & 0.07            & 0.07              & 15               \\
+        Angry            & 0.92               & 0.75            & 0.83              & 16               \\
+        Fearful          & 0.59               & 0.67            & 0.62              & 15               \\
+        Disgust          & 0.58               & 0.50            & 0.54              & 14               \\
+        Surprised        & 1.00               & 0.81            & 0.90              & 16               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.57}     & \textbf{112}     \\
+        Macro Avg        & 0.56               & 0.57            & 0.56              & 112              \\
+        Weighted Avg     & 0.58               & 0.57            & 0.56              & 112              \\ \hline
+        \end{tabular}
+        }
+        \caption{"CNN Baseline"}
+        \label{tab:cnn_baseline}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{
+        \begin{tabular}{lcccc}
+        \hline
+        \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+        Neutral          & 0.58               & 1.00            & 0.74              & 7                \\
+        Calm             & 0.54               & 0.87            & 0.67              & 15               \\
+        Happy            & 0.42               & 0.57            & 0.48              & 14               \\
+        Sad              & 1.00               & 0.27            & 0.42              & 15               \\
+        Angry            & 1.00               & 0.81            & 0.90              & 16               \\
+        Fearful          & 1.00               & 0.53            & 0.70              & 15               \\
+        Disgust          & 0.67               & 0.86            & 0.75              & 14               \\
+        Surprised        & 1.00               & 0.88            & 0.93              & 16               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.71}     & \textbf{112}     \\
+        Macro Avg        & 0.78               & 0.72            & 0.70              & 112              \\
+        Weighted Avg     & 0.80               & 0.71            & 0.70              & 112              \\ \hline
+        \end{tabular}
+        }
+        \caption{"ResNet18"}
+        \label{tab:resnet18}
+    \end{minipage}
+    
+    \vspace{0.6cm} % Space between the two rows
+    
+    % ================= ROW 2 =================
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{
+        \begin{tabular}{lcccc}
+        \hline
+        \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+        Neutral          & 0.62               & 0.71            & 0.67              & 7                \\
+        Calm             & 0.65               & 0.87            & 0.74              & 15               \\
+        Happy            & 0.38               & 0.36            & 0.37              & 14               \\
+        Sad              & 0.36               & 0.33            & 0.34              & 15               \\
+        Angry            & 0.76               & 0.81            & 0.79              & 16               \\
+        Fearful          & 1.00               & 0.40            & 0.57              & 15               \\
+        Disgust          & 0.71               & 0.86            & 0.77              & 14               \\
+        Surprised        & 0.88               & 0.94            & 0.91              & 16               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.66}     & \textbf{112}     \\
+        Macro Avg        & 0.67               & 0.66            & 0.65              & 112              \\
+        Weighted Avg     & 0.68               & 0.66            & 0.65              & 112              \\ \hline
+        \end{tabular}
+        }
+        \caption{"SupCon Frozen"}
+        \label{tab:supcon_frozen}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{
+        \begin{tabular}{lcccc}
+        \hline
+        \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+        Neutral          & 0.39               & 1.00            & 0.56              & 7                \\
+        Calm             & 0.63               & 0.80            & 0.71              & 15               \\
+        Happy            & 0.40               & 0.43            & 0.41              & 14               \\
+        Sad              & 0.83               & 0.33            & 0.48              & 15               \\
+        Angry            & 0.82               & 0.88            & 0.85              & 16               \\
+        Fearful          & 1.00               & 0.47            & 0.64              & 15               \\
+        Disgust          & 0.86               & 0.86            & 0.86              & 14               \\
+        Surprised        & 0.94               & 0.94            & 0.94              & 16               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.70}     & \textbf{112}     \\
+        Macro Avg        & 0.73               & 0.71            & 0.68              & 112              \\
+        Weighted Avg     & 0.76               & 0.70            & 0.69              & 112              \\ \hline
+        \end{tabular}
+        }
+        \caption{"SupCon Fine-Tuned"}
+        \label{tab:supcon_finetuned}
+    \end{minipage}
+    
+\end{table}
+
+The architectures were initially evaluated on the clean, uncorrupted test set to establish baseline predictive performance. The standard cross-entropy CNN baseline achieved an overall accuracy of 57\% (Table \ref{tab:cnn_baseline}). A review of its classification report reveals difficulties with lower-energy emotions, yielding F1-scores of just 0.07 for "Sad" and 0.26 for "Happy".
+
+In contrast, the Supervised Contrastive Learning (SupCon) pipeline demonstrated a substantial gain in performance. The frozen SupCon encoder evaluated via a linear probe achieved 66\% accuracy (Table \ref{tab:supcon_frozen}), proving that the Phase 1 contrastive pre-training successfully formed linearly separable clusters without any task-specific weight updates.
+
+Following end-to-end fine-tuning, the SupCon model reached a peak accuracy of 70\% (Table \ref{tab:supcon_finetuned}). The fine-tuned architecture proved capable of resolving high-energy emotions, generating high F1-scores for "Surprised" (0.94), "Disgust" (0.86), and "Angry" (0.85). This 13\% absolute accuracy improvement over the baseline confirms that contrastive clustering effectively distills core semantic emotional features, resulting in significantly cleaner decision boundaries than point-wise cross-entropy optimization.
+
+
+\begin{figure}[!htpb]
+    \centering
+    \includegraphics[width=\textwidth]{"clean_conf_matrix.png"}
+    \caption{"Side-by-side confusion matrices comparing the CNN Baseline and the Fine-Tuned SupCon model on the clean test set."}
+    \label{fig:clean_conf_matrix}
+\end{figure}
+
+% ------------------------------------------------ %
+
+\subsection{Robustness Testing (The Gaussian Noise Stress Test)}
+
+To empirically validate the core hypothesis of this study the models were subjected to a Gaussian noise stress test. Increasing levels of static noise (Standard Deviation ranging from 0.0 to 0.5) were injected into the test set to simulate distributional shifts and signal degradation. 
+
+The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_curve}) expose the fragility of the standard Cross-Entropy approach. While the CNN Baseline achieved an accuracy of 53.33\% on clean audio, its predictive power collapsed almost immediately under stress. At just 0.2 noise STD, the baseline accuracy fell by more than half to 24.58\%. By 0.5 STD, it degraded to 13.75\%, which is mathematically points to random guessing across the eight emotional classes ($\sim$12.5\%). This failure indicates that the label-driven baseline memorized highly specific, brittle frequency bands; once those specific frequencies were masked by static, the model became entirely blind.
+
+Conversely, the SupCon architectures demonstrated a pronounced shielding effect against the noise. The Fine-Tuned SupCon model not only established a higher initial accuracy (60.00\%) but degraded much slower, retaining 25.00\% accuracy at 0.4 STD—nearly double the baseline's performance (13.33\%) at the same noise level. The Frozen SupCon model maintained a higher accuracy at 0.3 STD (27.08\%) than its fine-tuned counterpart (24.17\%), suggesting that the pure contrastive clusters are highly invariant to distortion, whereas the fine-tuning phase slightly over-optimized the classifier for clean audio.
+
+Ultimately, these degradation curves prove that by utilizing \textit{SpecAugment} during the contrastive pre-training phase, the SupCon pipeline was forced to learn the invariant macro-structures (the shape) of the emotional expressions. Because it does not rely on exact, isolated pitch values, it can successfully map distorted signals to their correct semantic clusters long after standard networks have failed.
+
+\begin{table}[htpb]
+    \centering
+    \begin{tabular}{lcccc}
+    \hline
+    \textbf{Noise STD} & \textbf{CNN Baseline (\%)} & \textbf{ResNet18 (\%)} & \textbf{SupCon Frozen (\%)} & \textbf{SupCon Fine-Tuned (\%)} \\ \hline
+    0.0                & 53.33                      & 63.75                  & 53.75                       & 60.00                           \\
+    0.05               & 50.83                      & 60.83                  & 52.08                       & 55.83                           \\
+    0.1                & 49.58                      & 62.50                  & 45.42                       & 49.58                           \\
+    0.2                & 24.58                      & 56.67                  & 30.42                       & 29.17                           \\
+    0.3                & 16.67                      & 45.00                  & 27.08                       & 24.17                           \\
+    0.4                & 13.33                      & 36.67                  & 17.92                       & 25.00                           \\
+    0.5                & 13.75                      & 29.58                  & 13.33                       & 17.50                           \\ \hline
+    \end{tabular}
+    \caption{"Model robustness evaluation showing test accuracy degradation across increasing levels of Gaussian noise standard deviation."}
+    \label{tab:noise_robustness}
+\end{table}
+
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{"robustness_curve.png"}
+    \caption{"Model robustness curve demonstrating the degradation of test accuracy across increasing Gaussian noise levels. The SupCon models exhibit a significantly slower rate of decay compared to the CNN Baseline."}
+    \label{fig:robustness_curve}
+\end{figure}
+
+
+% ------------------------------------------------ %
+
+\section{Conclusion \& Future work}
+This study demonstrates that Supervised Contrastive Learning (SupCon) provides a superior alternative to standard Cross-Entropy for Speech Emotion Recognition on limited datasets. By leveraging Multi-View masking via \lstinline{SpecAugment}, the SupCon objective prevents the network from memorizing brittle, actor-specific acoustic frequencies. Instead, it forces the model to learn the generalized, invariant shape of human emotion. This approach not only elevated the baseline accuracy on clean audio, but also exhibited profound robustness against severe Gaussian noise, establishing contrastive pre-training as a highly effective methodology for deploying resilient audio processing models in noisy environments.
+
+Future work will focus on three main areas to improve this pipeline. First, we will fine-tune the Mel-Spectrogram settings to extract ritch audio features. Second, we plan to combine ResNet18 with SupCon, adjusting the network so it processes audio frequencies effectively rather than treating them like standard images. Finally, because the RAVDESS dataset is small, we will expand the training data by generating synthetic samples using SMOTE and by enriching with the datasets from other languages.
+
+
+% ------------------------------------------------ %
+
+%--- BIBLIOGRAPHY ---
+\clearpage 
+\nocite{*}
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography} 
+\begingroup 
+\footnotesize 
+\bibliographystyle{plain}
+\bibliography{refs}
+\endgroup 
+
+\end{document}

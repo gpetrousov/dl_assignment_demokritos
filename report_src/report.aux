@@ -1,0 +1,66 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\providecommand \oddpage@label [2]{}
+\HyPL@Entry{1<</S/D>>}
+\@writefile{toc}{\contentsline {section}{Declaration on the use of Artificial Intelligence}{1}{figure.caption.1}\protected@file@percent }
+\HyPL@Entry{2<</S/D>>}
+\HyPL@Entry{3<</S/D>>}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction and Motivation}{1}{section.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}The Challenge of Speech Emotion Recognition (SER)}{1}{subsection.0.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}The Flaws of Cross-Entropy and the SupCon Hypothesis}{1}{subsection.0.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Data and Preprocessing}{1}{section.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}The RAVDESS Dataset}{1}{subsection.0.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Audio to Mel-Spectrogram Conversion}{2}{subsection.0.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Data Augmentation (SpecAugment)}{2}{subsection.0.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology and Architectures}{2}{section.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}The Custom CNN Backbone}{2}{subsection.0.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Model A: The Cross-Entropy Baseline}{2}{subsection.0.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Model B: The SupCon Pipeline}{2}{subsection.0.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Stage 1: Contrastive Clustering}{2}{subsubsection*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Stage 2 \& 3: Linear Probing and Fine-Tuning}{3}{subsubsection*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments and Results}{3}{section.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Standard Evaluation (Clean Accuracy)}{3}{subsection.0.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces "CNN Baseline"\relax }}{3}{table.caption.4}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:cnn_baseline}{{1}{3}{"CNN Baseline"\relax }{table.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces "ResNet18"\relax }}{3}{table.caption.4}\protected@file@percent }
+\newlabel{tab:resnet18}{{2}{3}{"ResNet18"\relax }{table.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces "SupCon Frozen"\relax }}{3}{table.caption.4}\protected@file@percent }
+\newlabel{tab:supcon_frozen}{{3}{3}{"SupCon Frozen"\relax }{table.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces "SupCon Fine-Tuned"\relax }}{3}{table.caption.4}\protected@file@percent }
+\newlabel{tab:supcon_finetuned}{{4}{3}{"SupCon Fine-Tuned"\relax }{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Robustness Testing (The Gaussian Noise Stress Test)}{4}{subsection.0.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion \& Future work}{4}{section.0.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces "Side-by-side confusion matrices comparing the CNN Baseline and the Fine-Tuned SupCon model on the clean test set."\relax }}{5}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:clean_conf_matrix}{{1}{5}{"Side-by-side confusion matrices comparing the CNN Baseline and the Fine-Tuned SupCon model on the clean test set."\relax }{figure.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces "Model robustness evaluation showing test accuracy degradation across increasing levels of Gaussian noise standard deviation."\relax }}{5}{table.caption.6}\protected@file@percent }
+\newlabel{tab:noise_robustness}{{5}{5}{"Model robustness evaluation showing test accuracy degradation across increasing levels of Gaussian noise standard deviation."\relax }{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces "Model robustness curve demonstrating the degradation of test accuracy across increasing Gaussian noise levels. The SupCon models exhibit a significantly slower rate of decay compared to the CNN Baseline."\relax }}{6}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:robustness_curve}{{2}{6}{"Model robustness curve demonstrating the degradation of test accuracy across increasing Gaussian noise levels. The SupCon models exhibit a significantly slower rate of decay compared to the CNN Baseline."\relax }{figure.caption.7}{}}
+\citation{*}
+\bibstyle{plain}
+\bibdata{refs}
+\bibcite{giannakopoulos_deep_audio}{1}
+\bibcite{giannakopoulos_multimodal_audio}{2}
+\bibcite{khosla2020supervised}{3}
+\bibcite{livingstone2018ravdess}{4}
+\bibcite{musgrave_pytorch_metric_learning}{5}
+\bibcite{park2019specaugment}{6}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{7}{section*.8}\protected@file@percent }
+\gdef \@abspage@last{10}
