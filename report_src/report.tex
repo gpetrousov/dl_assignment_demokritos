@@ -315,6 +315,8 @@ Once the clusters are firmly established, the projection head is discarded. In S
         \label{tab:resnet18}
     \end{minipage}
 \end{table}
+
+The architectures were initially evaluated on the clean, uncorrupted test set to establish baseline predictive performance. The standard cross-entropy CNN baseline achieved an overall accuracy of 53\% (Table \ref{tab:cnn_baseline}). A review of its classification report reveals difficulties with lower-energy emotions, yielding F1-scores of 0.25 for "Sad" and 0.23 for "Happy".
     
 \begin{table}[h]
     \centering
@@ -366,7 +368,15 @@ Once the clusters are firmly established, the projection head is discarded. In S
     \end{minipage}
 \end{table}
 
-The architectures were initially evaluated on the clean, uncorrupted test set to establish baseline predictive performance. The standard cross-entropy CNN baseline achieved an overall accuracy of 53\% (Table \ref{tab:cnn_baseline}). A review of its classification report reveals difficulties with lower-energy emotions, yielding F1-scores of 0.25 for "Sad" and 0.23 for "Happy".
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"clean_conf_matrix.png"}
+    \caption{"Side-by-side confusion matrices comparing the CNN Baseline and the Fine-Tuned SupCon model on the clean test set."}
+    \label{fig:clean_conf_matrix}
+\end{figure}
+
+
 
 Implementing the Supervised Contrastive Learning (SupCon) pipeline yielded structural benefits to the latent space. Evaluated via a linear probe, the frozen SupCon encoder achieved a 54\% accuracy. While this represents only a marginal gain over the baseline, it proves that the Phase 1 contrastive pre-training successfully formed linearly separable clusters without any task-specific weight updates in the encoder.
 
@@ -411,14 +421,6 @@ The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_cur
 In contrast, the architectures employing Supervised Contrastive Learning exhibited greater structural stability. The Fine-Tuned SupCon model established a higher baseline accuracy (60.00\%) and showed a more gradual performance decline, maintaining 26.67\% accuracy at 0.4 STD compared to the CNN Baseline's 13.75\%. Additionally, the Frozen SupCon model recorded a higher accuracy at 0.3 STD (28.75\%) than the Fine-Tuned variant (23.33\%). This observation indicates that the pre-trained contrastive representations retain a higher degree of noise invariance. The subsequent end-to-end fine-tuning phase might have partially compromised this robustness by optimizing the linear classifier specifically for uncorrupted audio distributions.
 
 These findings indicate that applying SpecAugment during pre-training helps the model learn general acoustic patterns rather than memorizing exact frequencies. Because the network depends less on isolated audio details, it groups similar emotions into clusters that remain distinct even when the signal is corrupted. This structural stability provides a measurable advantage over the baseline training approach.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{"clean_conf_matrix.png"}
-    \caption{"Side-by-side confusion matrices comparing the CNN Baseline and the Fine-Tuned SupCon model on the clean test set."}
-    \label{fig:clean_conf_matrix}
-\end{figure}
-
 % ------------------------------------------------ %
 
 \section{Conclusion \& Future work}
