@@ -1,4 +1,4 @@
-# Evaluating Supevised Contrastive Learning for noise-robust Speech Emotion Recognition (SER)
+# Evaluating Supervised Contrastive Learning for noise-robust Speech Emotion Recognition (SER)
 
 Speech Emotion Recognition (SER) on limited datasets such as RAVDESS often leads to severe model overfitting. This study explores a Supervised Contrastive Learning (SupCon) pipeline, combined with multi-view SpecAugment, to extract invariant emotional representations rather than memorizing brittle acoustic frequencies. Our results demonstrate that the SupCon architecture increases baseline clean accuracy from 57\% to 70\% over a standard Cross-Entropy approach, while simultaneously exhibiting substantially greater robustness to heavy Gaussian noise degradation.
 
