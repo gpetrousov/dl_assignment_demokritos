@@ -1,0 +1,12 @@
+graph TD
+    subgraph Training["Training Pipeline"]
+        A["1. Feature Extraction (Mel-Spectrograms)"] --> B["2. Multi-View Augmentation (SpecAugment)"]
+        B --> C["3. Representation Learning (SupCon)"]
+        C --> D["4. Classification (Linear Head)"]
+    end
+
+    subgraph Evaluation["Evaluation Pipeline"]
+        E["5. The Stress Test (Inject Gaussian Noise)"] --> F["6. Robustness Evaluation"]
+    end
+
+    D -.->|"Trained Model"| E

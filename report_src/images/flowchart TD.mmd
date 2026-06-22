@@ -1,0 +1,15 @@
+graph LR
+    A["Original Mel-Spectrogram"] --> B1["View 1 (SpecAugment)"]
+    A --> B2["View 2 (SpecAugment)"]
+    
+    B1 --> C["Shared ResNet18 Encoder"]
+    B2 --> C
+    
+    C --> D1["Embedding 1"]
+    C --> D2["Embedding 2"]
+    
+    D1 --> E{"SupCon Loss"}
+    D2 --> E
+    
+    E -.-> F["PULL: Same Emotion"]
+    E -.-> G["PUSH: Different Emotions"]

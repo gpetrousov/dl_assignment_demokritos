@@ -1,0 +1,22 @@
+graph TD
+    Data["Input: Mel-Spectrogram Batch"] --> Aug1["View 1 (SpecAugment)"]
+    Data --> Aug2["View 2 (SpecAugment)"]
+
+    subgraph Stage1["Stage 1: Train Model A"]
+        Aug1 --> CNN["Custom CNN Encoder"]
+        Aug2 --> CNN
+        CNN --> Emb1["Embedding 1"]
+        CNN --> Emb2["Embedding 2"]
+        Emb1 --> SupCon["Supervised Contrastive Loss"]
+        Emb2 --> SupCon
+    end
+
+    subgraph Stage2["Stage 2: Train Model B"]
+        SupCon -.->|"Freeze CNN Weights"| Head["Linear Classifier Head"]
+        Head --> CE["Cross-Entropy Loss"]
+    end
+
+    subgraph Stage3["Stage 3: End-to-End Fine-Tuning"]
+        CE -.->|"Unfreeze Entire Network"| Tune["Fine-Tune CNN + Classifier (Low LR)"]
+        Tune --> Final["Final Robust Model"]
+    end
