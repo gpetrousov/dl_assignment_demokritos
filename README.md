@@ -2,6 +2,8 @@
 
 Speech Emotion Recognition (SER) on limited datasets such as RAVDESS often leads to model overfitting. This study investigates a Supervised Contrastive Learning (SupCon) pipeline combined with multi-view SpecAugment to extract stable emotional representations rather than memorizing specific acoustic frequencies. The experimental results demonstrate that the SupCon architecture increases the clean test accuracy from a 53% baseline to 60% compared to a standard Cross-Entropy approach. Furthermore, the proposed methodology exhibits improved classification stability under heavy Gaussian noise degradation.
 
+Presentation: [https://docs.google.com/presentation/d/1ShSmXY2OqCEbQQjYiLYCFc8Psu2bioECoFHhliiDEiQ/edit?usp=drive_link](https://docs.google.com/presentation/d/1ShSmXY2OqCEbQQjYiLYCFc8Psu2bioECoFHhliiDEiQ/edit?usp=drive_link)
+
 ## References:
 
 - [Audio 02 - Audio Features](https://lefkippos.ds.unipi.gr/modules/document/file.php/AI_IIT107/AI%20-%20Multimodal%20AUDIO%20-%2002_%20Audio%20features.pdf)
