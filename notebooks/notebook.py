@@ -657,40 +657,6 @@ class EmotionFeatureExtractorBase(nn.Module):
         x = self.flatten(x)
         return x # Output shape: (batch_size, 256)
 
-"""## CNN baseline
-
-Re-use the above head.
-"""
-
-class BaselineEmotionCNN(nn.Module):
-    """ Model A: THe original baseline architecture. """
-    def __init__(self, num_classes=8):
-        super(BaselineEmotionCNN, self).__init__()
-        self.encoder = EmotionFeatureExtractorBase()
-
-        # Classifier Head
-        self.classifier = nn.Sequential(
-            nn.Linear(256, 128),
-            nn.ReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(128, num_classes)
-        )
-
-    def forward(self, x):
-        features = self.encoder(x)
-        return self.classifier(features)
-
-# Sanity check to verify baseline learns as expected
-
-cnn_baseline = BaselineEmotionCNN(num_classes=len(set(emotion_labels)))
-learning_rate = 1e-3
-bs = 128
-optimizer = torch.optim.Adam(params=cnn_baseline.parameters(), lr=learning_rate, weight_decay=1e-2)
-loss_fn = nn.CrossEntropyLoss()
-epochs = 30
-
-train_model(epochs, train_dl, test_dl, cnn_baseline, optimizer, loss_fn, acc_thr=50)
-
 """---
 
 ## SupCon base - stage 1
