@@ -366,12 +366,13 @@ Once the clusters are firmly established, the projection head is discarded. In S
     \end{minipage}
 \end{table}
 
-The architectures were initially evaluated on the clean, uncorrupted test set to establish baseline predictive performance. The standard cross-entropy CNN baseline achieved an overall accuracy of 57\% (Table \ref{tab:cnn_baseline}). A review of its classification report reveals difficulties with lower-energy emotions, yielding F1-scores of just 0.07 for "Sad" and 0.26 for "Happy".
+The architectures were initially evaluated on the clean, uncorrupted test set to establish baseline predictive performance. The standard cross-entropy CNN baseline achieved an overall accuracy of 53\% (Table \ref{tab:cnn_baseline}). A review of its classification report reveals difficulties with lower-energy emotions, yielding F1-scores of 0.25 for "Sad" and 0.23 for "Happy".
 
-In contrast, the Supervised Contrastive Learning (SupCon) pipeline demonstrated a substantial gain in performance. The frozen SupCon encoder evaluated via a linear probe achieved 66\% accuracy (Table \ref{tab:supcon_frozen}), proving that the Phase 1 contrastive pre-training successfully formed linearly separable clusters without any task-specific weight updates.
+Implementing the Supervised Contrastive Learning (SupCon) pipeline yielded structural benefits to the latent space. Evaluated via a linear probe, the frozen SupCon encoder achieved a 54\% accuracy. While this represents only a marginal gain over the baseline, it proves that the Phase 1 contrastive pre-training successfully formed linearly separable clusters without any task-specific weight updates in the encoder.
 
-Following end-to-end fine-tuning, the SupCon model reached a peak accuracy of 70\% (Table \ref{tab:supcon_finetuned}). The fine-tuned architecture proved capable of resolving high-energy emotions, generating high F1-scores for "Surprised" (0.94), "Disgust" (0.86), and "Angry" (0.85). This 13\% absolute accuracy improvement over the baseline confirms that contrastive clustering effectively distills core semantic emotional features, resulting in significantly cleaner decision boundaries than point-wise cross-entropy optimization.
+Following end-to-end fine-tuning, the SupCon model reached a peak accuracy of 60\% (Table \ref{tab:supcon_finetuned}), accompanied by an increase in the macro F1-score from 0.51 to 0.57. This 7\% absolute accuracy improvement over the baseline suggests that contrastive clustering creates a more effective separation of emotional features, resulting in cleaner decision boundaries than point-wise Cross-Entropy optimization.
 
+To contextualize the custom architecture's performance, a pre-trained ResNet18 was evaluated as a heavyweight benchmark, achieving the highest overall accuracy of 64\% and a macro F1-score of 0.62. While this deep network predictably outperformed the lightweight custom networks in aggregate metrics, the SupCon Fine-Tuned model (60\% accuracy) demonstrated highly competitive and sometimes superior class-specific clustering. Notably, the task-oriented contrastive pipeline allowed the much shallower custom encoder to outperform the massive ResNet18 architecture yielding higher F1-scores for "Calm" (0.66 versus 0.61) and "Sad" (0.64 versus 0.53).
 
 % ------------------------------------------------ %
 
@@ -379,22 +380,25 @@ Following end-to-end fine-tuning, the SupCon model reached a peak accuracy of 70
 
 To empirically validate the core hypothesis of this study the models were subjected to a Gaussian noise stress test. Increasing levels of static noise (Standard Deviation ranging from 0.0 to 0.5) were injected into the test set to simulate distributional shifts and signal degradation. 
 
+
 \begin{table}[H]
     \centering
     \begin{tabular}{lcccc}
     \hline
     \textbf{Noise STD} & \textbf{CNN Baseline (\%)} & \textbf{ResNet18 (\%)} & \textbf{SupCon Frozen (\%)} & \textbf{SupCon Fine-Tuned (\%)} \\ \hline
-    0.0                & 53.33                      & 63.75                  & 53.75                       & 60.00                           \\
-    0.05               & 50.83                      & 60.83                  & 52.08                       & 55.83                           \\
-    0.1                & 49.58                      & 62.50                  & 45.42                       & 49.58                           \\
-    0.2                & 24.58                      & 56.67                  & 30.42                       & 29.17                           \\
-    0.3                & 16.67                      & 45.00                  & 27.08                       & 24.17                           \\
-    0.4                & 13.33                      & 36.67                  & 17.92                       & 25.00                           \\
-    0.5                & 13.75                      & 29.58                  & 13.33                       & 17.50                           \\ \hline
+    0.0                & 53.33                      & 64.17                  & 53.75                       & 60.00                           \\
+    0.05               & 50.42                      & 65.42                  & 53.33                       & 56.25                           \\
+    0.1                & 49.58                      & 65.83                  & 45.00                       & 47.92                           \\
+    0.2                & 25.83                      & 62.50                  & 32.08                       & 29.17                           \\
+    0.3                & 17.50                      & 58.33                  & 28.75                       & 23.33                           \\
+    0.4                & 13.75                      & 43.33                  & 17.08                       & 26.67                           \\
+    0.5                & 13.33                      & 35.00                  & 13.75                       & 19.58                           \\ \hline
     \end{tabular}
     \caption{"Model robustness evaluation showing test accuracy degradation across increasing levels of Gaussian noise standard deviation."}
     \label{tab:noise_robustness}
 \end{table}
+
+
 
 The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_curve}) expose the fragility of the standard Cross-Entropy approach. While the CNN Baseline achieved an accuracy of 53.33\% on clean audio, its predictive power collapsed almost immediately under stress. At just 0.2 noise STD, the baseline accuracy fell by more than half to 24.58\%. By 0.5 STD, it degraded to 13.75\%, which is mathematically points to random guessing across the eight emotional classes ($\sim$12.5\%). This failure indicates that the label-driven baseline memorized highly specific, brittle frequency bands; once those specific frequencies were masked by static, the model became entirely blind.
 
