@@ -1,0 +1,8 @@
+numpy
+librosa
+soundfile
+torch
+torchvision
+torchaudio
+pytorch-metric-learning
+scikit-learn
