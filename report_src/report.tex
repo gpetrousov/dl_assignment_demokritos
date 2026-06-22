@@ -163,7 +163,7 @@
 \HRule \\[0.4cm]
 \end{center}
 
-Course: Deep Learning
+\href{https://msc-ai.iit.demokritos.gr/en/classes/deep-learning}{Course: Deep Learning}
 
 \vfill
 \begin{doublespacing}
@@ -174,13 +174,6 @@ Course: Deep Learning
 \end{doublespacing}
 \end{center}
 \end{titlepage}
-
-%--- ASSIGNMENT CONTENT ---
-% \begin{center}
-%     {\huge \bfseries Integrating Individual Contributions as Intrinsic Exploration Scaffolds into PyMARLZoo$^{+}$} \\[0.4cm]
-%     {\LARGE Ioannis Petrousov} \\[0.2cm]
-%     {\large contact@petrousoft.com}
-% \end{center}
 
 \newpage
 \section*{Declaration on the use of Artificial Intelligence}
@@ -196,17 +189,6 @@ I hereby declare that generative Artificial Intelligence (AI) tools, specificall
 All primary research data, custom convolutional neural network configurations, dataset splitting protocols, and final analytical conclusions were generated entirely through my own engineering work. No section of this report was completely synthesized or fabricated by automated generation platforms.
 
 \vspace{1.5cm}
-
-% \noindent
-% \begin{minipage}[t]{0.45\textwidth}
-%     \rule{\textwidth}{0.4pt}\\
-%     \textbf{Location, Date}
-% \end{minipage}
-% \hfill
-% \begin{minipage}[t]{0.45\textwidth}
-%     \rule{\textwidth}{0.4pt}\\
-%     \textbf{Ioannis Petrousov}
-% \end{minipage}
 
 \newpage
 
@@ -224,7 +206,7 @@ All primary research data, custom convolutional neural network configurations, d
 \section{Introduction and Motivation}
 
 \subsection{The Challenge of Speech Emotion Recognition (SER)}
-Speech Emotion Recognition (SER) is a notoriously challenging domain within audio processing, primarily due to the high inter-class variance and the subjective nature of human emotional expression. This challenge is heavily exacerbated when working with small-scale datasets such as RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song), which contains roughly 1,200 training samples. When deploying standard deep learning architectures on such limited data, neural networks exhibit a strong tendency to bypass the intended task of learning generalized emotional representations. Instead, they exploit the path of least resistance by memorizing the unique acoustic signatures (pitch, timbre, and cadence) of the specific actors in the training set. Consequently, while the model may achieve artificially high training accuracy, its performance drastically degrades when evaluated on unseen actors, exposing weak decision boundaries that fail to capture true semantic emotional features.
+Speech Emotion Recognition (SER) is a notoriously challenging domain within audio processing, primarily due to the high inter-class variance and the subjective nature of human emotional expression. This challenge is heavily exacerbated when working with small-scale datasets such as RAVDESS\footnote{https://www.kaggle.com/datasets/uwrfkaggler/ravdess-emotional-speech-audio/data} (Ryerson Audio-Visual Database of Emotional Speech and Song), which contains roughly 1,200 training samples. When deploying standard deep learning architectures on such limited data, neural networks exhibit a strong tendency to bypass the intended task of learning generalized emotional representations. Instead, they exploit the path of least resistance by memorizing the unique acoustic signatures (pitch, timbre, and cadence) of the specific actors in the training set. Consequently, while the model may achieve artificially high training accuracy, its performance drastically degrades when evaluated on unseen actors, exposing weak decision boundaries that fail to capture true semantic emotional features.
 
 % ------------------------------------------------ %
 
@@ -283,7 +265,7 @@ Once the clusters are firmly established, the projection head is discarded. In S
 
 \subsection{Standard Evaluation (Clean Accuracy)}
 
-\begin{table}[htpb]
+\begin{table}[H]
     \centering
     
     % ================= ROW 1 =================
@@ -331,8 +313,10 @@ Once the clusters are firmly established, the projection head is discarded. In S
         \caption{"ResNet18"}
         \label{tab:resnet18}
     \end{minipage}
+\end{table}
     
-    \vspace{0.6cm} % Space between the two rows
+\begin{table}[h]
+    \centering
     
     % ================= ROW 2 =================
     \begin{minipage}{0.48\textwidth}
@@ -379,8 +363,8 @@ Once the clusters are firmly established, the projection head is discarded. In S
         \caption{"SupCon Fine-Tuned"}
         \label{tab:supcon_finetuned}
     \end{minipage}
-    
 \end{table}
+    
 
 The architectures were initially evaluated on the clean, uncorrupted test set to establish baseline predictive performance. The standard cross-entropy CNN baseline achieved an overall accuracy of 57\% (Table \ref{tab:cnn_baseline}). A review of its classification report reveals difficulties with lower-energy emotions, yielding F1-scores of just 0.07 for "Sad" and 0.26 for "Happy".
 
@@ -389,26 +373,13 @@ In contrast, the Supervised Contrastive Learning (SupCon) pipeline demonstrated 
 Following end-to-end fine-tuning, the SupCon model reached a peak accuracy of 70\% (Table \ref{tab:supcon_finetuned}). The fine-tuned architecture proved capable of resolving high-energy emotions, generating high F1-scores for "Surprised" (0.94), "Disgust" (0.86), and "Angry" (0.85). This 13\% absolute accuracy improvement over the baseline confirms that contrastive clustering effectively distills core semantic emotional features, resulting in significantly cleaner decision boundaries than point-wise cross-entropy optimization.
 
 
-\begin{figure}[!htpb]
-    \centering
-    \includegraphics[width=\textwidth]{"clean_conf_matrix.png"}
-    \caption{"Side-by-side confusion matrices comparing the CNN Baseline and the Fine-Tuned SupCon model on the clean test set."}
-    \label{fig:clean_conf_matrix}
-\end{figure}
-
 % ------------------------------------------------ %
 
 \subsection{Robustness Testing (The Gaussian Noise Stress Test)}
 
 To empirically validate the core hypothesis of this study the models were subjected to a Gaussian noise stress test. Increasing levels of static noise (Standard Deviation ranging from 0.0 to 0.5) were injected into the test set to simulate distributional shifts and signal degradation. 
 
-The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_curve}) expose the fragility of the standard Cross-Entropy approach. While the CNN Baseline achieved an accuracy of 53.33\% on clean audio, its predictive power collapsed almost immediately under stress. At just 0.2 noise STD, the baseline accuracy fell by more than half to 24.58\%. By 0.5 STD, it degraded to 13.75\%, which is mathematically points to random guessing across the eight emotional classes ($\sim$12.5\%). This failure indicates that the label-driven baseline memorized highly specific, brittle frequency bands; once those specific frequencies were masked by static, the model became entirely blind.
-
-Conversely, the SupCon architectures demonstrated a pronounced shielding effect against the noise. The Fine-Tuned SupCon model not only established a higher initial accuracy (60.00\%) but degraded much slower, retaining 25.00\% accuracy at 0.4 STD—nearly double the baseline's performance (13.33\%) at the same noise level. The Frozen SupCon model maintained a higher accuracy at 0.3 STD (27.08\%) than its fine-tuned counterpart (24.17\%), suggesting that the pure contrastive clusters are highly invariant to distortion, whereas the fine-tuning phase slightly over-optimized the classifier for clean audio.
-
-Ultimately, these degradation curves prove that by utilizing \textit{SpecAugment} during the contrastive pre-training phase, the SupCon pipeline was forced to learn the invariant macro-structures (the shape) of the emotional expressions. Because it does not rely on exact, isolated pitch values, it can successfully map distorted signals to their correct semantic clusters long after standard networks have failed.
-
-\begin{table}[htpb]
+\begin{table}[H]
     \centering
     \begin{tabular}{lcccc}
     \hline
@@ -425,14 +396,25 @@ Ultimately, these degradation curves prove that by utilizing \textit{SpecAugment
     \label{tab:noise_robustness}
 \end{table}
 
+The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_curve}) expose the fragility of the standard Cross-Entropy approach. While the CNN Baseline achieved an accuracy of 53.33\% on clean audio, its predictive power collapsed almost immediately under stress. At just 0.2 noise STD, the baseline accuracy fell by more than half to 24.58\%. By 0.5 STD, it degraded to 13.75\%, which is mathematically points to random guessing across the eight emotional classes ($\sim$12.5\%). This failure indicates that the label-driven baseline memorized highly specific, brittle frequency bands; once those specific frequencies were masked by static, the model became entirely blind.
 
-\begin{figure}[htpb]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{"robustness_curve.png"}
     \caption{"Model robustness curve demonstrating the degradation of test accuracy across increasing Gaussian noise levels. The SupCon models exhibit a significantly slower rate of decay compared to the CNN Baseline."}
     \label{fig:robustness_curve}
 \end{figure}
 
+Conversely, the SupCon architectures demonstrated a pronounced shielding effect against the noise. The Fine-Tuned SupCon model not only established a higher initial accuracy (60.00\%) but degraded much slower, retaining 25.00\% accuracy at 0.4 STD—nearly double the baseline's performance (13.33\%) at the same noise level. The Frozen SupCon model maintained a higher accuracy at 0.3 STD (27.08\%) than its fine-tuned counterpart (24.17\%), suggesting that the pure contrastive clusters are highly invariant to distortion, whereas the fine-tuning phase slightly over-optimized the classifier for clean audio.
+
+Ultimately, these degradation curves prove that by utilizing \textit{SpecAugment} during the contrastive pre-training phase, the SupCon pipeline was forced to learn the invariant macro-structures (the shape) of the emotional expressions. Because it does not rely on exact, isolated pitch values, it can successfully map distorted signals to their correct semantic clusters long after standard networks have failed.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"clean_conf_matrix.png"}
+    \caption{"Side-by-side confusion matrices comparing the CNN Baseline and the Fine-Tuned SupCon model on the clean test set."}
+    \label{fig:clean_conf_matrix}
+\end{figure}
 
 % ------------------------------------------------ %
 
