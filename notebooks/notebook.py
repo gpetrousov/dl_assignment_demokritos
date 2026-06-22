@@ -788,6 +788,7 @@ import torch
 import torch.nn as nn
 import random
 
+# Drop to GPU
 class SpecAugment(nn.Module):
     """
     Applies Time and Frequency Masking to batches of Mel-Spectrograms.
@@ -809,12 +810,13 @@ class SpecAugment(nn.Module):
         x_aug = x.clone()
         B, C, F, T = x_aug.shape
 
-        # masks each spectrogram in the batch
+        # masks each spectrogram in the batch - this will parts of the image
         for i in range(B):
             # 1. Frequency Masking
             for _ in range(self.num_freq_masks):
                 f = random.randint(0, self.freq_mask_param)
                 # Check out of bounds
+                # Pick a random freq to mask
                 f0 = random.randint(0, F - f)
                 # Fill with mean of  standardized
                 x_aug[i, :, f0:f0+f, :] = 0.0
@@ -823,6 +825,7 @@ class SpecAugment(nn.Module):
             for _ in range(self.num_time_masks):
                 t = random.randint(0, self.time_mask_param)
                 # Check out of bounds
+                # Pick random time to mask
                 t0 = random.randint(0, T - t)
                 # Fill the masked time band with 0.0
                 x_aug[i, :, :, t0:t0+t] = 0.0
@@ -840,7 +843,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # 1. Setup Model + Augmenter
 supcon_stage1 = SupConStage1(projection_dim=128).to(device)
 
-# Initialize Augmenter
+# Initialize Augmenter AND load to device
 augmenter = SpecAugment(freq_mask_param=15, time_mask_param=30).to(device)
 
 learning_rate = 1e-3
@@ -947,8 +950,12 @@ save_model(supcon_stage2, "supcon_stage_ft_acc60.pt")
 """# Evaluation results"""
 
 # Define model load function
+
+from google.colab import drive
+
 def load_model(path, ModelClass):
     """ Loads the parameters from a saved model. """
+    drive.mount("/content/drive")
     model = ModelClass()
     model.load_state_dict(torch.load(path))
     return model
@@ -1034,10 +1041,11 @@ def get_predictions(model, data_loader, device):
             outputs = model(batch_x)
 
             # Get the index of the highest probability
-        preds = torch.argmax(outputs, dim=1)
+            preds = torch.argmax(outputs, dim=1)
 
-        all_preds.extend(preds.cpu().numpy())
-        all_labels.extend(batch_y.numpy())
+            # Make sure we get all preds inside the batch!
+            all_preds.extend(preds.cpu().numpy())
+            all_labels.extend(batch_y.numpy())
 
     return np.array(all_labels), np.array(all_preds)
 
