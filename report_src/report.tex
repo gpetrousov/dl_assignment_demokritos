@@ -269,7 +269,6 @@ Once the clusters are firmly established, the projection head is discarded. In S
 
 \begin{table}[H]
     \centering
-    
     % ================= ROW 1 =================
     \begin{minipage}{0.48\textwidth}
         \centering
@@ -277,17 +276,17 @@ Once the clusters are firmly established, the projection head is discarded. In S
         \begin{tabular}{lcccc}
         \hline
         \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
-        Neutral          & 0.50               & 0.71            & 0.59              & 7                \\
-        Calm             & 0.50               & 0.87            & 0.63              & 15               \\
-        Happy            & 0.33               & 0.21            & 0.26              & 14               \\
-        Sad              & 0.08               & 0.07            & 0.07              & 15               \\
-        Angry            & 0.92               & 0.75            & 0.83              & 16               \\
-        Fearful          & 0.59               & 0.67            & 0.62              & 15               \\
-        Disgust          & 0.58               & 0.50            & 0.54              & 14               \\
-        Surprised        & 1.00               & 0.81            & 0.90              & 16               \\ \hline
-        \textbf{Accuracy}&                    &                 & \textbf{0.57}     & \textbf{112}     \\
-        Macro Avg        & 0.56               & 0.57            & 0.56              & 112              \\
-        Weighted Avg     & 0.58               & 0.57            & 0.56              & 112              \\ \hline
+        Neutral          & 0.43               & 0.38            & 0.40              & 16               \\
+        Calm             & 0.50               & 0.69            & 0.58              & 32               \\
+        Happy            & 0.23               & 0.16            & 0.19              & 32               \\
+        Sad              & 0.25               & 0.22            & 0.23              & 32               \\
+        Angry            & 0.73               & 0.84            & 0.78              & 32               \\
+        Fearful          & 0.61               & 0.34            & 0.44              & 32               \\
+        Disgust          & 0.56               & 0.75            & 0.64              & 32               \\
+        Surprised        & 0.76               & 0.81            & 0.79              & 32               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.53}     & \textbf{240}     \\
+        Macro Avg        & 0.51               & 0.52            & 0.51              & 240              \\
+        Weighted Avg     & 0.51               & 0.53            & 0.51              & 240              \\ \hline
         \end{tabular}
         }
         \caption{"CNN Baseline"}
@@ -299,17 +298,17 @@ Once the clusters are firmly established, the projection head is discarded. In S
         \begin{tabular}{lcccc}
         \hline
         \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
-        Neutral          & 0.58               & 1.00            & 0.74              & 7                \\
-        Calm             & 0.54               & 0.87            & 0.67              & 15               \\
-        Happy            & 0.42               & 0.57            & 0.48              & 14               \\
-        Sad              & 1.00               & 0.27            & 0.42              & 15               \\
-        Angry            & 1.00               & 0.81            & 0.90              & 16               \\
-        Fearful          & 1.00               & 0.53            & 0.70              & 15               \\
-        Disgust          & 0.67               & 0.86            & 0.75              & 14               \\
-        Surprised        & 1.00               & 0.88            & 0.93              & 16               \\ \hline
-        \textbf{Accuracy}&                    &                 & \textbf{0.71}     & \textbf{112}     \\
-        Macro Avg        & 0.78               & 0.72            & 0.70              & 112              \\
-        Weighted Avg     & 0.80               & 0.71            & 0.70              & 112              \\ \hline
+        Neutral          & 0.45               & 0.88            & 0.60              & 16                \\
+        Calm             & 0.61               & 0.69            & 0.65              & 32               \\
+        Happy            & 0.52               & 0.34            & 0.42              & 32               \\
+        Sad              & 0.53               & 0.25            & 0.34              & 32               \\
+        Angry            & 0.64               & 0.84            & 0.73              & 32               \\
+        Fearful          & 0.83               & 0.62            & 0.71              & 32               \\
+        Disgust          & 0.68               & 0.66            & 0.67              & 32               \\
+        Surprised        & 0.78               & 0.97            & 0.86              & 32               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.64}     & \textbf{240}     \\
+        Macro Avg        & 0.63               & 0.66            & 0.62              & 240              \\
+        Weighted Avg     & 0.64               & 0.64            & 0.62              & 240             \\ \hline
         \end{tabular}
         }
         \caption{"ResNet18"}
@@ -327,17 +326,17 @@ Once the clusters are firmly established, the projection head is discarded. In S
         \begin{tabular}{lcccc}
         \hline
         \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
-        Neutral          & 0.62               & 0.71            & 0.67              & 7                \\
-        Calm             & 0.65               & 0.87            & 0.74              & 15               \\
-        Happy            & 0.38               & 0.36            & 0.37              & 14               \\
-        Sad              & 0.36               & 0.33            & 0.34              & 15               \\
-        Angry            & 0.76               & 0.81            & 0.79              & 16               \\
-        Fearful          & 1.00               & 0.40            & 0.57              & 15               \\
-        Disgust          & 0.71               & 0.86            & 0.77              & 14               \\
-        Surprised        & 0.88               & 0.94            & 0.91              & 16               \\ \hline
-        \textbf{Accuracy}&                    &                 & \textbf{0.66}     & \textbf{112}     \\
-        Macro Avg        & 0.67               & 0.66            & 0.65              & 112              \\
-        Weighted Avg     & 0.68               & 0.66            & 0.65              & 112              \\ \hline
+        Neutral          & 0.47               & 0.44            & 0.45              & 16                \\
+        Calm             & 0.67               & 0.69            & 0.68              & 32               \\
+        Happy            & 0.33               & 0.22            & 0.26              & 32               \\
+        Sad              & 0.28               & 0.31            & 0.29              & 32               \\
+        Angry            & 0.68               & 0.72            & 0.70              & 32               \\
+        Fearful          & 0.80               & 0.25            & 0.38              & 32               \\
+        Disgust          & 0.58               & 0.66            & 0.62              & 32               \\
+        Surprised        & 0.56               & 0.97            & 0.71              & 32               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.54}     & \textbf{240}     \\
+        Macro Avg        & 0.55               & 0.53            & 0.51              & 240              \\
+        Weighted Avg     & 0.55               & 0.54            & 0.52              & 240              \\ \hline
         \end{tabular}
         }
         \caption{"SupCon Frozen"}
@@ -349,24 +348,23 @@ Once the clusters are firmly established, the projection head is discarded. In S
         \begin{tabular}{lcccc}
         \hline
         \textbf{Emotion} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
-        Neutral          & 0.39               & 1.00            & 0.56              & 7                \\
-        Calm             & 0.63               & 0.80            & 0.71              & 15               \\
-        Happy            & 0.40               & 0.43            & 0.41              & 14               \\
-        Sad              & 0.83               & 0.33            & 0.48              & 15               \\
-        Angry            & 0.82               & 0.88            & 0.85              & 16               \\
-        Fearful          & 1.00               & 0.47            & 0.64              & 15               \\
-        Disgust          & 0.86               & 0.86            & 0.86              & 14               \\
-        Surprised        & 0.94               & 0.94            & 0.94              & 16               \\ \hline
-        \textbf{Accuracy}&                    &                 & \textbf{0.70}     & \textbf{112}     \\
-        Macro Avg        & 0.73               & 0.71            & 0.68              & 112              \\
-        Weighted Avg     & 0.76               & 0.70            & 0.69              & 112              \\ \hline
+        Neutral          & 0.35               & 0.69            & 0.47              & 16               \\
+        Calm             & 0.66               & 0.72            & 0.69              & 32               \\
+        Happy            & 0.39               & 0.38            & 0.38              & 32               \\
+        Sad              & 0.64               & 0.22            & 0.33              & 32               \\
+        Angry            & 0.69               & 0.75            & 0.72              & 32               \\
+        Fearful          & 0.82               & 0.28            & 0.42              & 32               \\
+        Disgust          & 0.68               & 0.84            & 0.75              & 32               \\
+        Surprised        & 0.67               & 0.97            & 0.79              & 32               \\ \hline
+        \textbf{Accuracy}&                    &                 & \textbf{0.60}     & \textbf{240}     \\
+        Macro Avg        & 0.61               & 0.61            & 0.57              & 240              \\
+        Weighted Avg     & 0.63               & 0.60            & 0.57              & 240              \\ \hline
         \end{tabular}
         }
         \caption{"SupCon Fine-Tuned"}
         \label{tab:supcon_finetuned}
     \end{minipage}
 \end{table}
-    
 
 The architectures were initially evaluated on the clean, uncorrupted test set to establish baseline predictive performance. The standard cross-entropy CNN baseline achieved an overall accuracy of 57\% (Table \ref{tab:cnn_baseline}). A review of its classification report reveals difficulties with lower-energy emotions, yielding F1-scores of just 0.07 for "Sad" and 0.26 for "Happy".
 
