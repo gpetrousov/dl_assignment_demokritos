@@ -399,8 +399,7 @@ To empirically validate the core hypothesis of this study the models were subjec
 \end{table}
 
 
-
-The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_curve}) expose the fragility of the standard Cross-Entropy approach. While the CNN Baseline achieved an accuracy of 53.33\% on clean audio, its predictive power collapsed almost immediately under stress. At just 0.2 noise STD, the baseline accuracy fell by more than half to 24.58\%. By 0.5 STD, it degraded to 13.75\%, which is mathematically points to random guessing across the eight emotional classes ($\sim$12.5\%). This failure indicates that the label-driven baseline memorized highly specific, brittle frequency bands; once those specific frequencies were masked by static, the model became entirely blind.
+The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_curve}) illustrate the performance limitations of the standard Cross-Entropy approach under noisy conditions. The CNN Baseline achieved an accuracy of 53.33\% on clean audio but experienced a steep decline in predictive accuracy as noise increased. At 0.5 STD, performance degraded to 13.33\%, a value that closely approximates random guessing across the eight distinct emotional classes (∼12.5\%). This sharp degradation suggests that the baseline model may have overfitted to specific, localized frequency representations in the clean training data. Consequently, the introduction of Gaussian noise heavily disrupted its classification capability.
 
 \begin{figure}[H]
     \centering
@@ -409,9 +408,9 @@ The results (Table \ref{tab:noise_robustness} and Figure \ref{fig:robustness_cur
     \label{fig:robustness_curve}
 \end{figure}
 
-Conversely, the SupCon architectures demonstrated a pronounced shielding effect against the noise. The Fine-Tuned SupCon model not only established a higher initial accuracy (60.00\%) but degraded much slower, retaining 25.00\% accuracy at 0.4 STD—nearly double the baseline's performance (13.33\%) at the same noise level. The Frozen SupCon model maintained a higher accuracy at 0.3 STD (27.08\%) than its fine-tuned counterpart (24.17\%), suggesting that the pure contrastive clusters are highly invariant to distortion, whereas the fine-tuning phase slightly over-optimized the classifier for clean audio.
+In contrast, the architectures employing Supervised Contrastive Learning exhibited greater structural stability. The Fine-Tuned SupCon model established a higher baseline accuracy (60.00\%) and showed a more gradual performance decline, maintaining 26.67\% accuracy at 0.4 STD compared to the CNN Baseline's 13.75\%. Additionally, the Frozen SupCon model recorded a higher accuracy at 0.3 STD (28.75\%) than the Fine-Tuned variant (23.33\%). This observation indicates that the pre-trained contrastive representations retain a higher degree of noise invariance. The subsequent end-to-end fine-tuning phase might have partially compromised this robustness by optimizing the linear classifier specifically for uncorrupted audio distributions.
 
-Ultimately, these degradation curves prove that by utilizing \textit{SpecAugment} during the contrastive pre-training phase, the SupCon pipeline was forced to learn the invariant macro-structures (the shape) of the emotional expressions. Because it does not rely on exact, isolated pitch values, it can successfully map distorted signals to their correct semantic clusters long after standard networks have failed.
+These findings indicate that applying SpecAugment during pre-training helps the model learn general acoustic patterns rather than memorizing exact frequencies. Because the network depends less on isolated audio details, it groups similar emotions into clusters that remain distinct even when the signal is corrupted. This structural stability provides a measurable advantage over the baseline training approach.
 
 \begin{figure}[H]
     \centering
